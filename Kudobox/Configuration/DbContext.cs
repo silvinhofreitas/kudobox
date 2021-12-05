@@ -13,8 +13,7 @@ namespace Kudobox.Configuration
         {
             services.AddDbContext<UserContext>(o =>
                 o.UseSqlServer(configuration.GetConnectionString(ConfigurationConstants.CONNECTION_NAME)));
-            //     .AddDbContext<ProductContext>(o => o.UseSqlServer(configuration.GetConnectionString(Constants.CONNECTION_NAME)));
-               
+
             return services;
         }
     }

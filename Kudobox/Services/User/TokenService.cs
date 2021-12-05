@@ -19,6 +19,7 @@ namespace Kudobox.Services.User
                 new(ClaimTypes.Email, user.Email),
                 new(ClaimTypes.GivenName, user.Name),
                 new(ClaimTypes.Surname, user.Surname),
+                new(ClaimTypes.DateOfBirth, user.Birthday.ToShortDateString()),
                 new("Avatar", user.Avatar)
             };
             

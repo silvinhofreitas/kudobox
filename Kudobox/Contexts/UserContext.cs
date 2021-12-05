@@ -22,7 +22,7 @@ namespace Kudobox.Contexts
             
             // TODO Remove this temporary admin before release
 
-            User adminUser = new User
+            var adminUser = new User
             {
                 Id = Guid.Parse("3fd30650-4073-4f89-9bb8-0c3b1794aca3"),
                 Username = "admin",
@@ -33,7 +33,8 @@ namespace Kudobox.Contexts
                 Surname = "Admin",
                 Email = "kudbox@kudobox.com",
                 Status = UserStatusEnum.Active,
-                Roles = "ADMIN;USER"
+                Roles = "ADMIN;USER",
+                Birthday = new DateTime(1992,10,22)
             };
             
             modelBuilder.Entity<User>()
