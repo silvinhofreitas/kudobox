@@ -6,6 +6,7 @@ using Kudobox.Dto.Shared;
 using Kudobox.Dto.User;
 using Kudobox.Helpers.Constants;
 using Kudobox.Services.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 
@@ -44,6 +45,7 @@ namespace Kudobox.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = RoleConstants.ADMIN + "," + RoleConstants.USER_ADM)]
         public async Task<ActionResult> Create([FromBody] ManageUserDto input)
         {
             var (user, tempPassword) = await _userService.CreateNewUser(input);
@@ -56,6 +58,7 @@ namespace Kudobox.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = RoleConstants.ADMIN + "," + RoleConstants.USER_ADM + "," + RoleConstants.USER_VIEW)]
         public async Task<ActionResult> GetUserList(int page = 1, int pageSize = 10)
         {
             page = page < 1 ? 1 : page;
@@ -67,6 +70,7 @@ namespace Kudobox.Controllers
 
         [HttpGet]
         [Route("{id}")]
+        [Authorize(Roles = RoleConstants.ADMIN + "," + RoleConstants.USER_ADM + "," + RoleConstants.USER_VIEW)]
         public async Task<ActionResult> GetUserById(Guid id)
         {
             var user = await _userService.FindUserById(id);
@@ -79,6 +83,7 @@ namespace Kudobox.Controllers
 
         [HttpDelete]
         [Route("{id}")]
+        [Authorize(Roles = RoleConstants.ADMIN + "," + RoleConstants.USER_ADM)]
         public async Task<ActionResult> DeleteUserById(Guid id)
         {
             var user = await _userService.FindUserById(id);
@@ -93,6 +98,7 @@ namespace Kudobox.Controllers
 
         [HttpGet]
         [Route("{id}/roles")]
+        [Authorize(Roles = RoleConstants.ADMIN + "," + RoleConstants.USER_ADM + "," + RoleConstants.USER_VIEW)]
         public async Task<ActionResult> GetUserRoles(Guid id)
         {
             var user = await _userService.FindUserById(id);
@@ -107,6 +113,7 @@ namespace Kudobox.Controllers
 
         [HttpPost]
         [Route("{id}/roles")]
+        [Authorize(Roles = RoleConstants.ADMIN + "," + RoleConstants.USER_ADM)]
         public async Task<ActionResult> SetUserRoles(Guid id, [FromBody] ManageUserRolesDto roles)
         {
             var user = await _userService.FindUserById(id);
@@ -125,6 +132,7 @@ namespace Kudobox.Controllers
         
         [HttpDelete]
         [Route("{id}/roles")]
+        [Authorize(Roles = RoleConstants.ADMIN + "," + RoleConstants.USER_ADM)]
         public async Task<ActionResult> RemoveUserRoles(Guid id, [FromBody] ManageUserRolesDto roles)
         {
             var user = await _userService.FindUserById(id);
@@ -143,6 +151,7 @@ namespace Kudobox.Controllers
 
         [HttpPut]
         [Route("{id}")]
+        [Authorize(Roles = RoleConstants.ADMIN + "," + RoleConstants.USER_ADM)]
         public async Task<ActionResult> UpdateUser(Guid id, [FromBody] ManageUserDto updates)
         {
             var user = await _userService.FindUserById(id);
@@ -160,6 +169,7 @@ namespace Kudobox.Controllers
 
         [HttpPost]
         [Route("{id}/password")]
+        [Authorize(Roles = RoleConstants.ADMIN + "," + RoleConstants.USER)]
         public async Task<ActionResult> ChangePassword(Guid id, [FromBody] ChangePasswordDto passwordDto)
         {
             var user = await _userService.FindUserById(id);

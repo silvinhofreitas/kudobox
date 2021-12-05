@@ -8,7 +8,7 @@ namespace Kudobox.Configuration
 {
     public static class ResourcesConfiguration
     {
-        public static void ConfigureResources(this IServiceCollection services)
+        public static IServiceCollection ConfigureResources(this IServiceCollection services)
         {
             services.AddLocalization(o => o.ResourcesPath = "Resources");
 
@@ -25,6 +25,8 @@ namespace Kudobox.Configuration
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;
             });
+
+            return services;
         }
     }
 }
