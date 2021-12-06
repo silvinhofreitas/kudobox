@@ -11,8 +11,11 @@ namespace Kudobox.Configuration
         public static IServiceCollection ConfigureDbContext(this IServiceCollection services,
             IConfiguration configuration)
         {
-            services.AddDbContext<UserContext>(o =>
-                o.UseSqlServer(configuration.GetConnectionString(ConfigurationConstants.CONNECTION_NAME)));
+            services
+                .AddDbContext<UserContext>(o =>
+                    o.UseSqlServer(configuration.GetConnectionString(ConfigurationConstants.CONNECTION_NAME)))
+                .AddDbContext<CardContext>(o =>
+                    o.UseSqlServer(configuration.GetConnectionString(ConfigurationConstants.CONNECTION_NAME)));
 
             return services;
         }

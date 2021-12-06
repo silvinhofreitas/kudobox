@@ -50,11 +50,13 @@ namespace Kudobox.Services.User
 
             return new PagedResultDto
             {
-                page = userList.CurrentPage,
-                pageCount = userList.PageCount,
-                pageSize = userList.PageSize,
-                hasNext = page == userList.PageCount - 1,
-                result = userList.Results.Select(ul => ul.ToDto()).ToList()
+                Page = userList.CurrentPage,
+                PageCount = userList.PageCount,
+                PageSize = userList.PageSize,
+                HasNext = page < userList.PageCount,
+                HasPrevious = page > 1,
+                TotalItemsCount = userList.RowCount,
+                Items = userList.Results.Select(ul => ul.ToDto()).ToList()
             };
         }
 

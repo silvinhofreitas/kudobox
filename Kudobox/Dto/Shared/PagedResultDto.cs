@@ -4,10 +4,12 @@ namespace Kudobox.Dto.Shared
 {
     public class PagedResultDto
     {
-        public int page { get; set; }
-        public int pageCount { get; set; }
-        public int pageSize { get; set; }
-        public bool hasNext { get; set; }
-        public IEnumerable<object> result { get; set; }
+        public int Page { get; set; }
+        public int PageCount { get; set; }
+        public int PageSize { get; set; }
+        public bool HasNext { get; set; }
+        public bool HasPrevious { get; set; }
+        public int TotalItemsCount { get; set; }
+        public IEnumerable<object> Items { get; set; }
     }
 }
